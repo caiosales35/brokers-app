@@ -27,11 +27,11 @@ export default class Comission extends Model {
     }),
     date: Joi.date(),
     user_key: Joi.string().max(4),
-    property_code: Joi.string().max(4),
+    property_code: Joi.string().max(5),
     createdAt: Joi.date()
   })
 
-  static get relationMappings() {
+  static get relationMappings () {
     return {
       user: {
         relation: Model.BelongsToOneRelation,

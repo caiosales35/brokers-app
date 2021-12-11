@@ -13,10 +13,10 @@ export default class Property extends Model {
 
   static joiSchema = Joi.object().keys({
     key: Joi.number().integer(),
-    code: Joi.string().max(4).messages({
+    code: Joi.string().max(5).messages({
       'any.required': 'O codigo é obrigatório.',
       'string.empty': 'O codigo é obrigatório.',
-      'string.max': 'O codigo deve conter no máximo 4 caracteres.'
+      'string.max': 'O codigo deve conter no máximo 5 caracteres.'
     }),
     name: Joi.string().max(255).messages({
       'any.required': 'O nome é obrigatório.',
