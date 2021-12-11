@@ -17,12 +17,14 @@ LiveHere
 
 - criar repositorio gitHub
 - modelar banco de dados
+- iniciar monorepo com typescript
 
-iniciar back end
 migrations para banco de dados
+iniciar back end
+
 modelos e objection
 
 .gitIgnore
 script para popular banco de dados (mysql ou postgress?)
 
-Tiro só no meio só hahahah
+https://www.youtube.com/watch?v=rCeGfFk-uCk
