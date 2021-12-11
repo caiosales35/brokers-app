@@ -1,8 +1,8 @@
 import { Knex } from 'knex'
 
-export async function up (knex: Knex): Promise<void> {
+export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable('comission', table => {
-    table.bigInteger('key').primary().unsigned()
+    table.bigIncrements('key').primary().unsigned()
     table.string('value', 255).notNullable()
     table.dateTime('date').notNullable()
     table.bigInteger('user_key').unsigned().notNullable().references('user.key')
@@ -11,6 +11,6 @@ export async function up (knex: Knex): Promise<void> {
   })
 }
 
-export async function down (knex: Knex): Promise<void> {
+export async function down(knex: Knex): Promise<void> {
   return knex.schema.dropTableIfExists('comission')
 }
