@@ -22,7 +22,7 @@ export default class Comission extends Model {
     value: Joi.string().max(255).pattern(new RegExp('^[0-9]+$')).messages({
       'any.required': 'O valor é obrigatório.',
       'string.empty': 'O valor é obrigatório.',
-      'string.base': 'O valor deve conter apenas numeros.',
+      'string.base': 'O valor deve conter apenas números.',
       'string.max': 'O valor deve conter no máximo 255 caracteres.'
     }),
     date: Joi.date(),
@@ -31,7 +31,7 @@ export default class Comission extends Model {
     createdAt: Joi.date()
   })
 
-  static get relationMappings () {
+  static get relationMappings() {
     return {
       user: {
         relation: Model.BelongsToOneRelation,

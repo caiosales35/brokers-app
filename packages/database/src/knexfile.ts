@@ -2,7 +2,7 @@
 require('dotenv').config({ path: '../.env' })
 require('ts-node/register')
 
-module.exports = {
+export default {
   client: 'postgresql',
   connection: {
     host: process.env.DB_HOST,

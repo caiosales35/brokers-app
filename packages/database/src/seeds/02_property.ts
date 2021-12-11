@@ -10,102 +10,142 @@ exports.seed = function (knex: Knex) {
         {
           key: 1,
           code: 'IZM1',
-          name: 'IZM1'
+          title: 'Linda casa de vila no bairro do Tatuapé',
+          sale_price: '28000000',
+          type: 'CASA_DE_VILA'
         },
         {
           key: 2,
-          code: 'IZM11',
-          name: 'IZM11'
+          code: 'IZM26',
+          title: 'Caverna bem iluminada',
+          sale_price: '29500000',
+          type: 'CAVERNA'
         },
         {
           key: 3,
-          code: 'IZM12',
-          name: 'IZM12'
+          code: 'IZM35',
+          title: 'Palafita bem localizada em Itaquaquecetuba',
+          sale_price: '29500000',
+          type: 'PALAFITA'
         },
         {
           key: 4,
-          code: 'IZM6',
-          name: 'IZM6'
+          code: 'IZM19',
+          title: 'Palafita bem localizada em Itaquaquecetuba',
+          sale_price: '29500000',
+          type: 'PALAFITA'
         },
         {
           key: 5,
-          code: 'IZM15',
-          name: 'IZM15'
+          code: 'IZM6',
+          title: 'Apartamento com 103 quartões na Praça da Sé',
+          sale_price: '99500000',
+          type: 'APARTAMENTO'
         },
         {
           key: 6,
-          code: 'IZM16',
-          name: 'IZM16'
+          code: 'IZM9',
+          title: 'Casa torta no Jardins',
+          sale_price: '109500000',
+          type: 'CASA'
         },
         {
           key: 7,
-          code: 'IZM19',
-          name: 'IZM19'
-        },
-        {
-          key: 8,
-          code: 'IZM21',
-          name: 'IZM21'
-        },
-        {
-          key: 9,
-          code: 'IZM22',
-          name: 'IZM22'
+          code: 'IZM31',
+          title: 'Casa de árvore no Ibirapuera',
+          sale_price: '99500000',
+          type: 'CASA'
         },
         {
           key: 10,
-          code: 'IZM25',
-          name: 'IZM25'
+          code: 'IZM2',
+          title: 'IZM2',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 11,
-          code: 'IZM26',
-          name: 'IZM26'
+          code: 'IZM5',
+          title: 'IZM5',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 12,
-          code: 'IZM29',
-          name: 'IZM29'
+          code: 'IZM11',
+          title: 'IZM11',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 13,
-          code: 'IZM31',
-          name: 'IZM31'
+          code: 'IZM12',
+          title: 'IZM12',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 14,
-          code: 'IZM32',
-          name: 'IZM32'
+          code: 'IZM15',
+          title: 'IZM15',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 15,
-          code: 'IZM35',
-          name: 'IZM35'
+          code: 'IZM16',
+          title: 'IZM16',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 16,
-          code: 'IZM36',
-          name: 'IZM36'
+          code: 'IZM21',
+          title: 'IZM21',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 17,
-          code: 'IZM39',
-          name: 'IZM39'
+          code: 'IZM22',
+          title: 'IZM22',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 18,
-          code: 'IZM2',
-          name: 'IZM2'
+          code: 'IZM25',
+          title: 'IZM25',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 19,
-          code: 'IZM5',
-          name: 'IZM5'
+          code: 'IZM29',
+          title: 'IZM29',
+          sale_price: '29500000',
+          type: 'CASA'
         },
         {
           key: 20,
-          code: 'IZM9',
-          name: 'IZM9'
+          code: 'IZM32',
+          title: 'IZM32',
+          sale_price: '29500000',
+          type: 'CASA'
+        },
+        {
+          key: 21,
+          code: 'IZM36',
+          title: 'IZM36',
+          sale_price: '29500000',
+          type: 'CASA'
+        },
+        {
+          key: 22,
+          code: 'IZM39',
+          title: 'IZM39',
+          sale_price: '29500000',
+          type: 'CASA'
         }
       ])
     })
