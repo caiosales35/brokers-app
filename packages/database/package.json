@@ -2,5 +2,18 @@
   "name": "@repo/database",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "compile": "rm -rf dist && tsc",
+    "migrate:latest": "knex migrate:latest --knexfile ./src/knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile ./src/knexfile.ts",
+    "seed:run": "knex seed:run --knexfile ./src/knexfile.ts"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "joi": "^17.5.0",
+    "knex": "^0.95.14",
+    "objection": "^3.0.0",
+    "pg": "^8.7.1"
+  }
 }
