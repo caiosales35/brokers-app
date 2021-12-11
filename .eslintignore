@@ -1,0 +1,4 @@
+.eslintrs.js
+packages/**/*.js
+node_modules
+dist

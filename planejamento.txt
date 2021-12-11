@@ -1,0 +1,28 @@
+LiveHere
+
+- Configurar monorepo
+- husky e packgejson
+- Focar em testes automatizados
+- O basico mas funcional (cleanCode, escalabilidade)
+- Deploy vercel
+- Usar compnonentes no front
+- Usar gitflow
+- Tentar usar TDD
+- Fazer readme
+- Usar hooks
+- CHANGELOG??
+- Separar vantagens e desvantagens de monorepo
+
+- Passos
+
+- criar repositorio gitHub
+- modelar banco de dados
+
+iniciar back end
+migrations para banco de dados
+modelos e objection
+
+.gitIgnore
+script para popular banco de dados (mysql ou postgress?)
+
+Tiro só no meio só hahahah
