@@ -14,6 +14,7 @@
     "@types/cors": "^2.8.12",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "joi": "^17.5.0",
     "query-strings-parser": "^2.1.10"
   },
   "devDependencies": {
