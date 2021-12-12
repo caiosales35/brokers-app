@@ -1,7 +1,7 @@
 import Joi from 'joi'
 import { Model } from 'objection'
+import Broker from './Broker'
 import Property from './Property'
-import User from './User'
 
 export default class Comission extends Model {
   static tableName = 'comission'
@@ -14,7 +14,7 @@ export default class Comission extends Model {
   // eslint-disable-next-line camelcase
   property_code?: string
   createdAt?: string
-  user?: User
+  user?: Broker
   property?: Property
 
   static joiSchema = Joi.object().keys({
@@ -31,11 +31,11 @@ export default class Comission extends Model {
     createdAt: Joi.date()
   })
 
-  static get relationMappings() {
+  static get relationMappings () {
     return {
-      user: {
+      Broker: {
         relation: Model.BelongsToOneRelation,
-        modelClass: User,
+        modelClass: Broker,
         join: {
           from: 'comission.user_key',
           to: 'user.key'
