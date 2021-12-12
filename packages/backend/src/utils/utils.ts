@@ -21,3 +21,30 @@ export const brokerSearchParams = Joi.object({
   name: Joi.string(),
   phone: Joi.string()
 })
+
+export const handleRawSqlToGetBrokersOrderByLeads = (
+  searchParams: QsBrokersParams,
+  page: number,
+  pageSize: number
+) => {
+  if (searchParams.name) {
+    return `select * from "user" inner join (select count(*) as leads, broker_key from lead
+              group by lead.broker_key ) as leads on leads.broker_key = "user".key
+              where "user".name = '${searchParams.name}'
+              order by leads desc limit ${pageSize} offset ${page * pageSize};`
+  } else if (searchParams.phone) {
+    return `select * from "user" inner join (select count(*) as leads, broker_key from lead
+              group by lead.broker_key ) as leads on leads.broker_key = "user".key
+              where "user".phone = '${searchParams.phone}'
+              order by leads desc limit ${pageSize} offset ${page * pageSize};`
+  } else if (searchParams.phone && searchParams.name) {
+    return `select * from "user" inner join (select count(*) as leads, broker_key from lead
+              group by lead.broker_key ) as leads on leads.broker_key = "user".key
+              where "user".name = '${searchParams.name}' and 
+              "user".phone = '${searchParams.phone}' 
+              order by leads desc limit ${pageSize} offset ${page * pageSize};`
+  }
+  return `select * from "user" inner join (select count(*) as leads, broker_key from lead
+  group by lead.broker_key ) as leads on leads.broker_key = "user".key
+  order by leads desc limit ${pageSize} offset ${page * pageSize};`
+}

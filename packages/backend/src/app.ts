@@ -2,7 +2,8 @@ import { init as databaseInit } from '@repo/database'
 import cors from 'cors'
 import express from 'express'
 import qs from 'query-strings-parser'
-import { getBrokerController } from './broker/getBroker'
+import { getBrokersController } from './broker/getBrokers'
+import { getBrokersOrderByLeadsController } from './broker/getBrokersOrderByLeads'
 import { handle } from './utils/handler'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 
@@ -20,11 +21,12 @@ app.use(
   })
 )
 
-databaseInit()
+export const database = databaseInit()
 
 const router = express.Router()
 
-router.get('/broker', handle(getBrokerController))
+router.get('/broker/lead', handle(getBrokersOrderByLeadsController))
+router.get('/broker', handle(getBrokersController))
 
 app.use('/api/v1', router)
 
