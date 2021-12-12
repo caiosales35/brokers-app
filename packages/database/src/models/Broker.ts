@@ -1,6 +1,7 @@
 import Joi from 'joi'
 import { Model } from 'objection'
 import Comission from './Comission'
+import Lead from './Lead'
 
 export default class Broker extends Model {
   static tableName = 'user'
@@ -13,6 +14,7 @@ export default class Broker extends Model {
   phone?: string
   createdAt?: string
   comissions?: Comission[]
+  leads?: Lead[]
 
   static joiSchema = Joi.object().keys({
     key: Joi.number().integer(),
@@ -43,7 +45,7 @@ export default class Broker extends Model {
     createdAt: Joi.date()
   })
 
-  static get relationMappings() {
+  static get relationMappings () {
     return {
       comissions: {
         relation: Model.HasManyRelation,
@@ -51,6 +53,14 @@ export default class Broker extends Model {
         join: {
           from: 'user.key',
           to: 'comission.user_key'
+        }
+      },
+      leads: {
+        relation: Model.HasManyRelation,
+        modelClass: Lead,
+        join: {
+          from: 'user.key',
+          to: 'lead.broker_key'
         }
       }
     }

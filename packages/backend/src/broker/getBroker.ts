@@ -1,12 +1,14 @@
 // filtro por nome e telefone de broker
 // comemissoes /  maior -> menor
 
-import { Lead } from '@repo/database'
+import { Broker } from '@repo/database'
 
 // leads / maior -> menor
-export const getBrokerController = async () => {
-  const brokers = await Lead.query().select()
-  console.log(brokers)
+export const getBrokerController = async (): Promise<Broker[]> => {
+  const brokers = await Broker.query()
+    .select()
+    .withGraphFetched('leads')
+    .withGraphFetched('comissions')
 
-  return { oi: 'ou' }
+  return brokers
 }

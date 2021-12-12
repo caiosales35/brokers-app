@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "rm -rf dist && tsc",
     "start": "node --respawn -r dotenv/config dist/index.js --port=$PORT",
-    "dev": "ts-node-dev --respawn --ignore-watch node_modules -r dotenv/config src/index.ts --port=$PORT"
+    "dev": "ts-node-dev --respawn --ignore-watch node_modules -r dotenv/config src/index.ts --port=$PORT",
+    "test": "jest --detectOpenHandles --config ./jest.config.ts"
   },
   "dependencies": {
     "@repo/database": "*",
@@ -16,6 +17,9 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.3",
+    "@types/supertest": "^2.0.11",
+    "supertest": "^6.1.6",
     "ts-node-dev": "^1.1.8"
   }
 }
