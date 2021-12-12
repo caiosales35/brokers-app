@@ -2,7 +2,7 @@ import Joi from 'joi'
 import { Model } from 'objection'
 import Property from './Property'
 
-export default class User extends Model {
+export default class Lead extends Model {
   static tableName = 'lead'
 
   key?: number
@@ -46,7 +46,7 @@ export default class User extends Model {
     broker_key: Joi.number()
   })
 
-  static get relationMappings () {
+  static get relationMappings() {
     return {
       interests: {
         relation: Model.HasManyRelation,

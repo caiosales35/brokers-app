@@ -1,9 +1,9 @@
 import Knex from 'knex'
 import { Model } from 'objection'
-import knexConfig from './knexfile'
+import knexfile from './knexfile'
 
 export default () => {
-  const knex = Knex(knexConfig)
+  const knex = Knex(knexfile)
   Model.knex(knex)
   return knex
 }

@@ -1,6 +1,8 @@
 import { init as databaseInit } from '@repo/database'
 import cors from 'cors'
 import express from 'express'
+import { getBrokerController } from './broker/getBroker'
+import { handle } from './utils/handler'
 
 const app = express()
 
@@ -10,9 +12,7 @@ databaseInit()
 
 const router = express.Router()
 
-router.get('/', (req, resp) => {
-  return resp.json({ message: 'runnning...' })
-})
+router.get('/broker', handle(getBrokerController))
 
 app.use('/api/v1', router)
 

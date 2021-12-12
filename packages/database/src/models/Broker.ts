@@ -2,7 +2,7 @@ import Joi from 'joi'
 import { Model } from 'objection'
 import Comission from './Comission'
 
-export default class User extends Model {
+export default class Broker extends Model {
   static tableName = 'user'
 
   key?: number
