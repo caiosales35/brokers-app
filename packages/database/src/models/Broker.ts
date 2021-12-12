@@ -1,9 +1,6 @@
 import Joi from 'joi'
-import { ModelObject } from '../types'
-import Model from './BaseModel'
+import { Model } from 'objection'
 import Comission from './Comission'
-
-export type BrokerModel = ModelObject<Broker>
 
 export default class Broker extends Model {
   static tableName = 'user'
@@ -46,7 +43,7 @@ export default class Broker extends Model {
     createdAt: Joi.date()
   })
 
-  static get relationMappings () {
+  static get relationMappings() {
     return {
       comissions: {
         relation: Model.HasManyRelation,

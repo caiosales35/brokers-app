@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config({ path: '../.env' })
-require('ts-node/register')
+// require('ts-node/register')
 
 export default {
   client: 'postgresql',
