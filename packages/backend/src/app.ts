@@ -3,6 +3,7 @@ import cors from 'cors'
 import express from 'express'
 import qs from 'query-strings-parser'
 import { getBrokersController } from './broker/getBrokers'
+import { getBrokersOrderByComissionValueController } from './broker/getBrokersOrderByComissionValue'
 import { getBrokersOrderByLeadsController } from './broker/getBrokersOrderByLeads'
 import { handle } from './utils/handler'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -25,6 +26,10 @@ export const database = databaseInit()
 
 const router = express.Router()
 
+router.get(
+  '/broker/comission',
+  handle(getBrokersOrderByComissionValueController)
+)
 router.get('/broker/lead', handle(getBrokersOrderByLeadsController))
 router.get('/broker', handle(getBrokersController))
 

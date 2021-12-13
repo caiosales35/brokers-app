@@ -27,3 +27,16 @@ export type BrokerWithLeadCount = {
   // eslint-disable-next-line camelcase
   broker_key?: string
 }
+
+export type BrokerWithComissionValue = {
+  key?: string
+  name?: string
+  email?: string
+  // eslint-disable-next-line camelcase
+  int_code?: string
+  phone?: string
+  createdAt?: string
+  value?: number
+  // eslint-disable-next-line camelcase
+  property_code?: string
+}

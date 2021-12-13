@@ -1,10 +1,10 @@
 import request from 'supertest'
 import app from '../../app'
 
-const URL = '/api/v1/broker/lead'
+const URL = '/api/v1/broker/comission'
 
-describe('Get Broker order by Leads test', () => {
-  it('Should return 200 at get Brokers order by Lead endpoint', async () => {
+describe('Get Broker order by Comission value test', () => {
+  it('Should return 200 at get Brokers order by Comission endpoint', async () => {
     const response = await request(app).get(URL)
     expect(response.status).toBe(200)
   })
