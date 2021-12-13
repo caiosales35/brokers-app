@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
-
-// import { Container } from './styles';
+import React from 'react'
+import RoutesProvider from './routes'
 
 const App: React.FC = () => {
-  
-
-  return <h1>Hello World</h1>
+  return <RoutesProvider />
 }
 
 export default App
