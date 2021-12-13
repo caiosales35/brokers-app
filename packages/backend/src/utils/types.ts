@@ -14,3 +14,16 @@ export type QsBrokersParams = {
   name?: string
   phone?: string
 }
+
+export type BrokerWithLeadCount = {
+  key?: string
+  name?: string
+  email?: string
+  // eslint-disable-next-line camelcase
+  int_code?: string
+  phone?: string
+  createdAt?: string
+  leads?: string
+  // eslint-disable-next-line camelcase
+  broker_key?: string
+}
