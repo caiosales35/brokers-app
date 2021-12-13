@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+// import { Container } from './styles';
+
+const App: React.FC = () => {
+  
+
+  return <h1>Hello World</h1>
 }
 
-export default App;
+export default App
