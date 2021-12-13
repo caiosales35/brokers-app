@@ -1,13 +1,15 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../pages/Home'
 
 const RoutesProvider = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/broker" element={<Home />} />
-      </Routes>
+      <Switch>
+        <Route path="/broker">
+          <Home />
+        </Route>
+      </Switch>
     </BrowserRouter>
   )
 }
