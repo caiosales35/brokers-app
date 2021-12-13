@@ -19,19 +19,14 @@ export default class Comission extends Model {
 
   static joiSchema = Joi.object().keys({
     key: Joi.number().integer(),
-    value: Joi.string().max(255).pattern(new RegExp('^[0-9]+$')).messages({
-      'any.required': 'O valor é obrigatório.',
-      'string.empty': 'O valor é obrigatório.',
-      'string.base': 'O valor deve conter apenas números.',
-      'string.max': 'O valor deve conter no máximo 255 caracteres.'
-    }),
+    value: Joi.number().integer(),
     date: Joi.date(),
     user_key: Joi.string().max(4),
     property_code: Joi.string().max(5),
     createdAt: Joi.date()
   })
 
-  static get relationMappings () {
+  static get relationMappings() {
     return {
       Broker: {
         relation: Model.BelongsToOneRelation,

@@ -3,7 +3,7 @@ import { Knex } from 'knex'
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable('comission', table => {
     table.bigIncrements('key').primary().unsigned()
-    table.string('value', 255).notNullable()
+    table.bigInteger('value').notNullable()
     table.dateTime('date').notNullable()
     table.bigInteger('user_key').unsigned().notNullable().references('user.key')
     table.string('property_code', 5).references('property.code')
