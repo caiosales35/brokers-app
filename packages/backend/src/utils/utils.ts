@@ -55,26 +55,26 @@ export const handleRawSqlToGetBrokersOrderByComissionValue = (
   pageSize: number
 ): string => {
   if (searchParams.name) {
-    return `select "user".*, comission.value, comission.property_code from "user"
+    return `select "user".*, comission.value, comission.property_code, comission.key as comission_key from "user"
               inner join comission on "user".key = comission.user_key
               where "user".name = '${searchParams.name}' 
               order by comission.value desc 
               limit ${pageSize} offset ${page * pageSize};`
   } else if (searchParams.phone) {
-    return `select "user".*, comission.value, comission.property_code from "user"
+    return `select "user".*, comission.value, comission.property_code, comission.key as comission_key from "user"
               inner join comission on "user".key = comission.user_key
               where "user".phone = '${searchParams.phone}'
               order by comission.value desc 
               limit ${pageSize} offset ${page * pageSize};`
   } else if (searchParams.phone && searchParams.name) {
-    return `select "user".*, comission.value, comission.property_code from "user"
+    return `select "user".*, comission.value, comission.property_code, comission.key as comission_key from "user"
               inner join comission on "user".key = comission.user_key
               where "user".name = '${searchParams.name}' and 
               "user".phone = '${searchParams.phone}' 
               order by comission.value desc 
               limit ${pageSize} offset ${page * pageSize};`
   }
-  return `select "user".*, comission.value, comission.property_code from "user"
+  return `select "user".*, comission.value, comission.property_code, comission.key as comission_key from "user"
            inner join comission on "user".key = comission.user_key
            order by comission.value desc limit ${pageSize} 
            offset ${page * pageSize};`

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Request } from 'express'
 
 export type QsRequest = Request & {
@@ -19,12 +20,10 @@ export type BrokerWithLeadCount = {
   key?: string
   name?: string
   email?: string
-  // eslint-disable-next-line camelcase
   int_code?: string
   phone?: string
   createdAt?: string
   leads?: string
-  // eslint-disable-next-line camelcase
   broker_key?: string
 }
 
@@ -32,11 +31,10 @@ export type BrokerWithComissionValue = {
   key?: string
   name?: string
   email?: string
-  // eslint-disable-next-line camelcase
   int_code?: string
   phone?: string
   createdAt?: string
   value?: number
-  // eslint-disable-next-line camelcase
   property_code?: string
+  comission_key?: string
 }

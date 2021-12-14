@@ -15,6 +15,8 @@ export default class Broker extends Model {
   createdAt?: string
   comissions?: Comission[]
   leads?: Lead[]
+  // eslint-disable-next-line camelcase
+  comission_key?: string
 
   static joiSchema = Joi.object().keys({
     key: Joi.number().integer(),

@@ -9,6 +9,7 @@ export const Container = styled.div`
 `
 
 export const ButtonContainer = styled.div`
+  margin: 20px;
   width: 80%;
   justify-content: space-around;
   display: flex;

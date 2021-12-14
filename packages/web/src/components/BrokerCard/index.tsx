@@ -5,7 +5,7 @@ import { centsToReal, handlWhatsappLink } from '../../utils'
 import { Container } from './styles'
 
 export type BrokerCard = {
-  key: number
+  key: number | string
   name?: string
   email?: string
   int_code?: string
@@ -72,7 +72,7 @@ const BrokerCard: React.FC<BrokerCard> = ({
 
       {!isLeadArray && <p>Quantidade de leads: {leads}</p>}
       <hr />
-      {value && <p>Valor da comissão: {centsToReal(value)}</p>}
+      {value && <p>Valor da comissão: R$ {centsToReal(value)}</p>}
     </Container>
   )
 }
