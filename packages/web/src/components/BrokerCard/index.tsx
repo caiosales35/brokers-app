@@ -33,8 +33,7 @@ const BrokerCard: React.FC<BrokerCard> = ({
         {name} - {email}
       </p>
       <a href={brokerWhatsappLink} target={'_blank'} rel="noreferrer">
-        {int_code}
-        {phone}
+        {int_code} {phone}
       </a>
       <hr />
       {comissions && <p>Comissões:</p>}
@@ -62,15 +61,14 @@ const BrokerCard: React.FC<BrokerCard> = ({
                     target={'_blank'}
                     rel="noreferrer"
                   >
-                    {lead?.int_code}
-                    {lead?.phone}
+                    {lead?.int_code} {lead?.phone}
                   </a>
                 </p>
               </p>
             )
         )}
 
-      {!isLeadArray && <p>Quantidade de leads: {leads}</p>}
+      {!isLeadArray && !value && <p>Quantidade de leads: {leads}</p>}
       <hr />
       {value && <p>Valor da comissão: R$ {centsToReal(value)}</p>}
     </Container>

@@ -15,4 +15,8 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+  }
 `

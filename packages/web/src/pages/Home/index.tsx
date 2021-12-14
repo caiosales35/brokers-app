@@ -1,17 +1,17 @@
 /* eslint-disable camelcase */
 import { Typography } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
 import { Broker } from '@repo/database'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import BrokerCard from '../../components/BrokerCard'
 import StyledButton from '../../components/StyledButton'
+import { handleQs } from '../../utils'
 import { axiosInstance } from '../../utils/axios'
 import { ButtonContainer, Container } from './styles'
 
 const Home: React.FC = () => {
   const baseURL = 'http://localhost:3001/api/v1/broker'
   const pageSize = 10
-  const history = useHistory()
 
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
@@ -20,6 +20,9 @@ const Home: React.FC = () => {
   const [isOrderByLeads, setIsOrderByLeads] = useState(false)
   const [isOrderByComissionValue, setIsOrderByComissionValue] = useState(false)
   const [apiUrl, setApiUrl] = useState(baseURL)
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [qs, setQs] = useState('')
 
   useEffect(() => {
     fetchData()
@@ -27,45 +30,28 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchData()
-  }, [apiUrl])
+  }, [apiUrl, qs])
 
   const fetchData = () => {
+    const url = `${apiUrl}${qs}`
     axiosInstance
       .get<{
         results: Broker[]
         total: number
-      }>(apiUrl)
+      }>(url)
       .then(response => {
         setBrokers(response.data?.results || response.data)
         setTotalPages(Math.ceil(response.data.total / pageSize))
       })
   }
 
-  /* const { getPaginated } = useBroker()
-
-  const fetchData = () => {
-    const params = qs.parse(history.location.search)
-    getPaginated({ ...params, page })
-      .then(response => {
-        const loadedBrokers = response.results
-        const brokersToInsert = loadedBrokers
-
-        if (page === 0) {
-          setBrokers(brokersToInsert)
-        } else {
-          setBrokers([...brokers, ...brokersToInsert])
-        }
-      })
-      .catch(e => {
-        // toast.error(e)
-        console.log(e)
-      })
+  const handleSearch = () => {
+    if (name || phone) {
+      setQs(handleQs(name || '', phone || ''))
+      setName('')
+      setPhone('')
+    }
   }
-
-  useEffect(() => {
-    fetchData()
-  }, [page])
-*/
 
   const handleOrderLabel = (): string => {
     if (isOrderByAlphabetic) return 'alfabética'
@@ -99,15 +85,6 @@ const Home: React.FC = () => {
   const pageDecrement = () => {
     setPage(page > 0 ? page - 1 : page)
   }
-  /*
-  const onChangeParams = () => {
-    if (page === 0) {
-      fetchData()
-    } else {
-      setPage(0)
-    }
-  }
-*/
 
   return (
     <Container>
@@ -125,6 +102,38 @@ const Home: React.FC = () => {
         <StyledButton size="small" onClick={handleIsOrderByComissionValue}>
           Comissões
         </StyledButton>
+      </ButtonContainer>
+      {qs && (
+        <Typography variant="body2">
+          Parametro da busca:{' '}
+          {qs
+            .replace('?', '')
+            .replace('=', '')
+            .replace('&', '')
+            .replace('name', '')
+            .replace('phone', '')
+            .replace('=', ' ')}
+        </Typography>
+      )}
+      <ButtonContainer>
+        <TextField
+          variant="filled"
+          size="small"
+          placeholder="Nome"
+          label="Nome"
+          onChange={e => setName(e.target.value)}
+          value={name}
+        />
+        <TextField
+          variant="filled"
+          size="small"
+          placeholder="Telefone"
+          label="Telefone"
+          onChange={e => setPhone(e.target.value)}
+          value={phone}
+        />
+        <StyledButton onClick={handleSearch}>Buscar</StyledButton>
+        <StyledButton onClick={() => setQs('')}>Limpar busca</StyledButton>
       </ButtonContainer>
       {brokers?.map(
         broker =>
