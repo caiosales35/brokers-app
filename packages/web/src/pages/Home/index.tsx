@@ -1,11 +1,15 @@
+import { Typography } from '@material-ui/core'
 import { Broker } from '@repo/database'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import BrokerCard from '../../components/BrokerCard'
+import StyledButton from '../../components/StyledButton'
 import { axiosInstance } from '../../utils/axios'
-import { Container } from './styles'
+import { ButtonContainer, Container } from './styles'
 
 const Home: React.FC = () => {
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
   const [brokers, setBrokers] = useState<Broker[]>([])
 
   const history = useHistory()
@@ -16,7 +20,10 @@ const Home: React.FC = () => {
         results: Broker[]
         total: number
       }>('http://localhost:3001/api/v1/broker')
-      .then(response => setBrokers(response.data.results))
+      .then(response => {
+        setBrokers(response.data.results)
+        setTotalPages(Math.ceil(response.data.total / 10))
+      })
   }, [])
 
   /* const { getPaginated } = useBroker()
@@ -43,11 +50,15 @@ const Home: React.FC = () => {
   useEffect(() => {
     fetchData()
   }, [page])
-
+*/
   const pageIncrement = () => {
-    setPage(page + 1)
+    setPage(page === totalPages ? page : page + 1)
+  }
+  const pageDecrement = () => {
+    setPage(page > 0 ? page - 1 : page)
   }
 
+  /*
   const onChangeParams = () => {
     if (page === 0) {
       fetchData()
@@ -59,9 +70,20 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      {brokers.map(broker => (
-        <p key={broker.key}>{broker?.name}</p>
-      ))}
+      <Typography variant="h2">Corretores</Typography>
+      {brokers.map(
+        broker => broker.key && <BrokerCard key={broker.key} {...broker} />
+      )}
+      <ButtonContainer>
+        <StyledButton size="medium" onClick={pageDecrement}>
+          Página anterior
+        </StyledButton>
+        <StyledButton size="medium" onClick={pageIncrement}>
+          Próxima página
+        </StyledButton>
+      </ButtonContainer>
+      <p>Pagina: {page}</p>
+      <p>Total de paginas: {totalPages}</p>
     </Container>
   )
 }

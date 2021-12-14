@@ -7,3 +7,11 @@ export const Container = styled.div`
   flex: 1;
   padding: 50px;
 `
+
+export const ButtonContainer = styled.div`
+  width: 80%;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
