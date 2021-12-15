@@ -7,6 +7,7 @@ import BrokerCard from '../../components/BrokerCard'
 import StyledButton from '../../components/StyledButton'
 import { handleQs } from '../../utils'
 import { axiosInstance } from '../../utils/axios'
+import { PaginatedRequestParams } from '../../utils/types'
 import { ButtonContainer, Container } from './styles'
 
 const Home: React.FC = () => {
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchData()
-  }, [apiUrl, qs])
+  }, [apiUrl, qs, page])
 
   const fetchData = () => {
     const url = `${apiUrl}${qs}`
@@ -38,10 +39,10 @@ const Home: React.FC = () => {
       .get<{
         results: Broker[]
         total: number
-      }>(url)
+      }>(url, { params: { skip: page - 1 } as PaginatedRequestParams })
       .then(response => {
         setBrokers(response.data?.results || response.data)
-        setTotalPages(Math.ceil(response.data.total / pageSize))
+        setTotalPages(Math.ceil(response.data?.total / pageSize))
       })
   }
 
@@ -80,10 +81,10 @@ const Home: React.FC = () => {
   }
 
   const pageIncrement = () => {
-    setPage(page === totalPages ? page : page + 1)
+    setPage(page >= totalPages ? page : page + 1)
   }
   const pageDecrement = () => {
-    setPage(page > 0 ? page - 1 : page)
+    setPage(page > 1 ? page - 1 : page)
   }
 
   return (
@@ -154,7 +155,7 @@ const Home: React.FC = () => {
           Próxima página
         </StyledButton>
       </ButtonContainer>
-      <p>Pagina: {page}</p>
+      <p>Pagina: {totalPages === 0 ? totalPages : page}</p>
       <p>Total de paginas: {totalPages}</p>
     </Container>
   )
