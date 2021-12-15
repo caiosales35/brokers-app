@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Typography } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
 import { Broker } from '@repo/database'
 import React, { useEffect, useState } from 'react'
@@ -136,17 +136,24 @@ const Home: React.FC = () => {
         <StyledButton onClick={handleSearch}>Buscar</StyledButton>
         <StyledButton onClick={() => setQs('')}>Limpar busca</StyledButton>
       </ButtonContainer>
-      {brokers?.map(
-        broker =>
-          broker.key && (
-            <BrokerCard
-              {...{
-                ...broker,
-                key: broker.key + (broker?.comission_key || '')
-              }}
-            />
-          )
-      )}
+      <Grid container>
+        {brokers?.map(
+          broker =>
+            broker.key && (
+              <Grid item xs={12} sm={6} md={4} xl={3}>
+                <Paper elevation={3}>
+                  <BrokerCard
+                    {...{
+                      ...broker,
+                      key: broker.key + (broker?.comission_key || '')
+                    }}
+                  />
+                </Paper>
+              </Grid>
+            )
+        )}
+      </Grid>
+
       <ButtonContainer>
         <StyledButton size="medium" onClick={pageDecrement}>
           Página anterior
@@ -156,7 +163,7 @@ const Home: React.FC = () => {
         </StyledButton>
       </ButtonContainer>
       <p>Pagina: {totalPages === 0 ? totalPages : page}</p>
-      <p>Total de paginas: {totalPages}</p>
+      <p>Total de paginas: {totalPages || 1}</p>
     </Container>
   )
 }
