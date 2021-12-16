@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import BrokerCard from '../../components/BrokerCard'
 import StyledButton from '../../components/StyledButton'
 import useBroker from '../../hooks/useBroker'
-import { handleQs } from '../../utils'
+import { brokerQsToBrokerSearchParam, handleQs } from '../../utils'
 import { ButtonContainer, Container } from './styles'
 
 const Home: React.FC = () => {
@@ -82,14 +82,7 @@ const Home: React.FC = () => {
       </ButtonContainer>
       {qs && (
         <Typography variant="body2">
-          Parametro da busca:{' '}
-          {qs
-            .replace('?', '')
-            .replace('=', '')
-            .replace('&', '')
-            .replace('name', '')
-            .replace('phone', '')
-            .replace('=', ' ')}
+          Parametro da busca: {brokerQsToBrokerSearchParam(qs)}
         </Typography>
       )}
       <ButtonContainer>

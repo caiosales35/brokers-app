@@ -11,3 +11,13 @@ export const handleQs = (name: string, phone: string): string => {
   else if (phone) qs = `${qs}phone=${phone}`
   return qs
 }
+
+export const brokerQsToBrokerSearchParam = (qs: string): string => {
+  return qs
+    .replace('?', '')
+    .replace('=', '')
+    .replace('&', '')
+    .replace('name', '')
+    .replace('phone', '')
+    .replace('=', ' ')
+}
