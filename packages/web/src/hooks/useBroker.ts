@@ -7,7 +7,6 @@ const PAGE_SIZE = 10
 
 const useBroker = (apiUrl: string, qs: string, page: number) => {
   const [brokers, setBrokers] = useState<Broker[]>([])
-  const [totalPages, setTotalPages] = useState(0)
 
   useEffect(() => {
     fetchData()
@@ -23,16 +22,20 @@ const useBroker = (apiUrl: string, qs: string, page: number) => {
       .get<{
         results: Broker[]
         total: number
-      }>(url, { params: { skip: page - 1 } as PaginatedRequestParams })
+      }>(url, {
+        params: {
+          skip: page - 1,
+          limit: PAGE_SIZE
+        } as PaginatedRequestParams
+      })
       .then(response => {
-        setBrokers(response.data?.results || response.data)
-        setTotalPages(Math.ceil(response.data?.total / PAGE_SIZE))
+        const responseBrokers = response.data?.results || response.data
+        setBrokers(responseBrokers)
       })
   }
 
   return {
-    brokers,
-    totalPages
+    brokers
   }
 }
 

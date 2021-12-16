@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   const [phone, setPhone] = useState('')
   const [qs, setQs] = useState('')
 
-  const { totalPages, brokers } = useBroker(apiUrl, qs, page)
+  const { brokers } = useBroker(apiUrl, qs, page)
 
   const handleSearch = () => {
     if (name || phone) {
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
   }
 
   const pageIncrement = () => {
-    setPage(page >= totalPages ? page : page + 1)
+    setPage(page + 1)
   }
   const pageDecrement = () => {
     setPage(page > 1 ? page - 1 : page)
@@ -121,6 +121,11 @@ const Home: React.FC = () => {
               </Grid>
             )
         )}
+        {brokers.length === 0 && (
+          <Typography variant="body2">
+            Nenhum resultado encontrado...
+          </Typography>
+        )}
       </Grid>
 
       <ButtonContainer>
@@ -131,8 +136,7 @@ const Home: React.FC = () => {
           Próxima página
         </StyledButton>
       </ButtonContainer>
-      <p>Pagina: {totalPages === 0 ? totalPages : page}</p>
-      <p>Total de paginas: {totalPages || 1}</p>
+      <p>Pagina: {page}</p>
     </Container>
   )
 }
