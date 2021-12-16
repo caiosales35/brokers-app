@@ -1,22 +1,17 @@
 /* eslint-disable camelcase */
 import { Grid, Paper, Typography } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
-import { Broker } from '@repo/database'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BrokerCard from '../../components/BrokerCard'
 import StyledButton from '../../components/StyledButton'
+import useBroker from '../../hooks/useBroker'
 import { handleQs } from '../../utils'
-import { axiosInstance } from '../../utils/axios'
-import { PaginatedRequestParams } from '../../utils/types'
 import { ButtonContainer, Container } from './styles'
 
 const Home: React.FC = () => {
   const baseURL = 'http://localhost:3001/api/v1/broker'
-  const pageSize = 10
 
   const [page, setPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(0)
-  const [brokers, setBrokers] = useState<Broker[]>([])
   const [isOrderByAlphabetic, setIsOrderByAlphabetic] = useState(true)
   const [isOrderByLeads, setIsOrderByLeads] = useState(false)
   const [isOrderByComissionValue, setIsOrderByComissionValue] = useState(false)
@@ -25,26 +20,7 @@ const Home: React.FC = () => {
   const [phone, setPhone] = useState('')
   const [qs, setQs] = useState('')
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  useEffect(() => {
-    fetchData()
-  }, [apiUrl, qs, page])
-
-  const fetchData = () => {
-    const url = `${apiUrl}${qs}`
-    axiosInstance
-      .get<{
-        results: Broker[]
-        total: number
-      }>(url, { params: { skip: page - 1 } as PaginatedRequestParams })
-      .then(response => {
-        setBrokers(response.data?.results || response.data)
-        setTotalPages(Math.ceil(response.data?.total / pageSize))
-      })
-  }
+  const { totalPages, brokers } = useBroker(apiUrl, qs, page)
 
   const handleSearch = () => {
     if (name || phone) {
