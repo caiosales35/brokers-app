@@ -6,10 +6,6 @@ export const Container = styled.div`
   align-items: center;
   flex: 1;
   padding: 50px;
-
-  & .MuiGrid-container {
-    width: unset;
-  }
 `
 
 export const ButtonContainer = styled.div`
