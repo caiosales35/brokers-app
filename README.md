@@ -2,7 +2,7 @@
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- [Expo](https://expo.io/)
+- [Express](https://expressjs.com/pt-br/)
 - [Jest](https://jestjs.io/)
 - [Node.js](https://nodejs.org/en/)
 - [Material UI](https://mui.com/pt/)
