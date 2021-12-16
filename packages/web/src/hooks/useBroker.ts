@@ -1,30 +1,42 @@
-/* import { Broker } from '@repo/database'
-import { useCallback } from 'react'
+import { Broker } from '@repo/database'
+import { useEffect, useState } from 'react'
 import { axiosInstance } from '../utils/axios'
 import { PaginatedRequestParams } from '../utils/types'
 
-const END_POINT = '/broker'
+const PAGE_SIZE = 10
 
-const useBroker = () => {
-  const getPaginated = useCallback(async (params: PaginatedRequestParams) => {
-    try {
-      const response = await axiosInstance.get<{
-        results: Broker[]
-        total: number
-      }>(END_POINT, {
-        params
-      })
-      console.log(response)
-      return Promise.resolve(response.data)
-    } catch (err) {
-      return Promise.reject(err)
-    }
+const useBroker = (apiUrl: string, qs: string, page: number) => {
+  const [brokers, setBrokers] = useState<Broker[]>([])
+
+  useEffect(() => {
+    fetchData()
   }, [])
 
+  useEffect(() => {
+    fetchData()
+  }, [apiUrl, qs, page])
+
+  const fetchData = () => {
+    const url = `${apiUrl}${qs}`
+    axiosInstance
+      .get<{
+        results: Broker[]
+        total: number
+      }>(url, {
+        params: {
+          skip: page - 1,
+          limit: PAGE_SIZE
+        } as PaginatedRequestParams
+      })
+      .then(response => {
+        const responseBrokers = response.data?.results || response.data
+        setBrokers(responseBrokers)
+      })
+  }
+
   return {
-    getPaginated
+    brokers
   }
 }
 
 export default useBroker
-*/

@@ -1,22 +1,17 @@
 /* eslint-disable camelcase */
 import { Grid, Paper, Typography } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
-import { Broker } from '@repo/database'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BrokerCard from '../../components/BrokerCard'
 import StyledButton from '../../components/StyledButton'
-import { handleQs } from '../../utils'
-import { axiosInstance } from '../../utils/axios'
-import { PaginatedRequestParams } from '../../utils/types'
+import useBroker from '../../hooks/useBroker'
+import { brokerQsToBrokerSearchParam, handleQs } from '../../utils'
 import { ButtonContainer, Container } from './styles'
 
 const Home: React.FC = () => {
   const baseURL = 'http://localhost:3001/api/v1/broker'
-  const pageSize = 10
 
   const [page, setPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(0)
-  const [brokers, setBrokers] = useState<Broker[]>([])
   const [isOrderByAlphabetic, setIsOrderByAlphabetic] = useState(true)
   const [isOrderByLeads, setIsOrderByLeads] = useState(false)
   const [isOrderByComissionValue, setIsOrderByComissionValue] = useState(false)
@@ -25,26 +20,7 @@ const Home: React.FC = () => {
   const [phone, setPhone] = useState('')
   const [qs, setQs] = useState('')
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  useEffect(() => {
-    fetchData()
-  }, [apiUrl, qs, page])
-
-  const fetchData = () => {
-    const url = `${apiUrl}${qs}`
-    axiosInstance
-      .get<{
-        results: Broker[]
-        total: number
-      }>(url, { params: { skip: page - 1 } as PaginatedRequestParams })
-      .then(response => {
-        setBrokers(response.data?.results || response.data)
-        setTotalPages(Math.ceil(response.data?.total / pageSize))
-      })
-  }
+  const { brokers } = useBroker(apiUrl, qs, page)
 
   const handleSearch = () => {
     if (name || phone) {
@@ -81,7 +57,7 @@ const Home: React.FC = () => {
   }
 
   const pageIncrement = () => {
-    setPage(page >= totalPages ? page : page + 1)
+    setPage(page + 1)
   }
   const pageDecrement = () => {
     setPage(page > 1 ? page - 1 : page)
@@ -106,14 +82,7 @@ const Home: React.FC = () => {
       </ButtonContainer>
       {qs && (
         <Typography variant="body2">
-          Parametro da busca:{' '}
-          {qs
-            .replace('?', '')
-            .replace('=', '')
-            .replace('&', '')
-            .replace('name', '')
-            .replace('phone', '')
-            .replace('=', ' ')}
+          Parametro da busca: {brokerQsToBrokerSearchParam(qs)}
         </Typography>
       )}
       <ButtonContainer>
@@ -152,6 +121,11 @@ const Home: React.FC = () => {
               </Grid>
             )
         )}
+        {brokers.length === 0 && (
+          <Typography variant="body2">
+            Nenhum resultado encontrado...
+          </Typography>
+        )}
       </Grid>
 
       <ButtonContainer>
@@ -162,8 +136,7 @@ const Home: React.FC = () => {
           Próxima página
         </StyledButton>
       </ButtonContainer>
-      <p>Pagina: {totalPages === 0 ? totalPages : page}</p>
-      <p>Total de paginas: {totalPages || 1}</p>
+      <p>Pagina: {page}</p>
     </Container>
   )
 }
